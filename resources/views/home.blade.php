@@ -1,9 +1,9 @@
 @extends('templates.main', 
     [
     'sliding' => $sliding, 
-    'tagline' => $companies->TagLine,
+    'tagline' => $companies->TagLine ?? null,
     'detailsCompanies' => $detailsCompanies,
-    'companyName' => $companies->CompanyName,
+    'companyName' => $companies->CompanyName ?? null,
     'topMenus' => $topMenus,
     'seoHeaders' => $seoHeaders,
     'slideShows' => $slideShows,
@@ -19,12 +19,7 @@
     <!-- ======= Clients Section ======= -->
     @include('templates.clients')
 
-    <!-- ======= Portfolio Section ======= -->
-    @include('templates.portofolio')
-
-    <!-- ======= Team Section ======= -->
-    @include('templates.team')
-
+    
     <!-- ======= Contact Section ======= -->
     @include('templates.contact')
 @endsection

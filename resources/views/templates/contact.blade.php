@@ -12,9 +12,10 @@
               <i class="bi bi-geo-alt"></i>
               <h3>Address</h3>
               <address> 
-                @php 
+                @php
                   $dataFilter = App\Http\Controllers\rjsoft::filteringObj($detailsCompanies, 'Alamat'); 
                   echo $dataFilter;
+                  
                 @endphp
               </address>
             </div>
@@ -82,8 +83,7 @@
             <div class="form-group mt-3">
               <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
             </div>
-
-            <div class="text-center"><button type="submit" class="btn btn-success">Send Message</button></div>
+            <button type="submit" class="btn float-end btn-success text-white mt-2">Send Message</button>
           </form>
         </div>
 

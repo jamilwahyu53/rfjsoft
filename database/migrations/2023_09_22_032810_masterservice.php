@@ -15,11 +15,11 @@ class Masterservice extends Migration
     {
         Schema::create('masterservice', function (Blueprint $table) {
             $table->string('Kode');
-            $table->string('ServiceName');
-            $table->string('DetailService');
-            $table->string('TagLine');
-            $table->string('Icon');
-            $table->string('LinkDetail');
+            $table->string('ServiceName')->nullable();
+            $table->string('DetailService')->nullable();
+            $table->string('TagLine')->nullable();
+            $table->string('Icon')->nullable();
+            $table->string('LinkDetail')->nullable();
             $table->boolean('IsActive')->default(true);
             $table->string('CreateBy')->default('ADMIN');
             $table->timestamp('CreateDate')->useCurrent();

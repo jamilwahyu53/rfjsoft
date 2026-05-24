@@ -70,8 +70,8 @@ class rjsoft extends Controller
         $resSlideshow = masterslideshow::all()->where('IsActive', '=', 1);
         return view('home', [
             "sliding" => true,
-            "tagline" => $resProfileCompanies[0],
-            "companies" => $resProfileCompanies[0],
+            "tagline" => $resProfileCompanies[0] ?? null,
+            "companies" => $resProfileCompanies[0] ?? null,
             "services" => $resServices,
             "clients" => $resClients,
             "portfolios" => $resPortfolios,

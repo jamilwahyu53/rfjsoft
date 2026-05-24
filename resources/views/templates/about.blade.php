@@ -1,13 +1,13 @@
 <section id="about">
       <div class="container" data-aos="fade-up">
         <div class="row">
-          <div class="col-lg-6 about-img">
-            <img src="assets/img/about-img.jpg" alt="">
+          <div class="col-lg-4 about-img">
+            <img src="assets/img/about-img.png" alt="">
           </div>
 
-          <div class="col-lg-6 content">
+          <div class="col-lg-8 content">
             <h2>About Us</h2>
-            <h3>{{ $companies->AboutUs }}</h3>
+            <h3>{{ $companies->AboutUs ?? 'Belum Ada About Us Kamu' }}</h3>
             <!--
             <ul>
               <li><i class="bi bi-check-circle"></i> Inovasi Berbasis Kebutuhan.</li>

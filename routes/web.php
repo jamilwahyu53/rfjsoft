@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\rjsoft;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EntranceController;
+use App\Http\Controllers\KemenagKontroller;
+
+use App\Models\group;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +35,6 @@ Route::group(['middleware' => ['usersession']], function() {
     Route::get('/DataStaff', [AdminController::class, 'DataStaff'])->name('DataStaff'); 
     Route::get('/SettingCompany', [AdminController::class, 'SettingCompany'])->name('SettingCompany'); 
     Route::get('/test/{Kode}/{Table}', [AdminController::class, 'GenerateId']); 
-    Route::get('/Logout', [AdminController::class, 'Logout'])->name('Logout'); 
     Route::get('/SetActive/{Kode}/{Table}', [AdminController::class, 'SetActive'])->name('SetActive'); 
     Route::get('/SettingService', [AdminController::class, 'SettingService'])->name('SettingService'); 
     Route::get('/DataClient', [AdminController::class, 'DataClient'])->name('DataClient'); 
@@ -63,3 +67,62 @@ Route::get('/Login', [AdminController::class, 'Login'])->name('login');
 Route::get('/StaffResetPass', [AdminController::class, 'StaffResetPass'])->name('StaffResetPass');
 Route::post('/LoginStaff', [AdminController::class, 'LoginStaff'])->name('LoginStaff');
 Route::post('/ActionStaffResetPass', [AdminController::class, 'ActionStaffResetPass'])->name('ActionStaffResetPass');
+
+
+Route::get('/DataStaffWihtoutLogin', [AdminController::class, 'DataStaffWihtoutLogin'])->name('DataStaffWihtoutLogin');
+Route::post('/InsertDataStaffNoLogin', [AdminController::class, 'InsertDataStaffNoLogin'])->name('InsertDataStaffNoLogin');
+
+Route::get('/Logout', [AdminController::class, 'Logout'])->name('Logout'); 
+    
+
+//ENTRANCE
+Route::get('/Register', [EntranceController::class, 'Register'])->name('Register');
+Route::get('/LoginEntrance', [EntranceController::class, 'LoginEntrance'])->name('LoginEntrance');
+Route::get('/RegisterEntrance', [EntranceController::class, 'RegisterEntrance'])->name('RegisterEntrance');
+Route::post('/RegisterEntrance', [EntranceController::class, 'RegisterEvent'])->name('RegisterEvent');
+Route::post('/LoginEntrance', [EntranceController::class, 'LoginEvent'])->name('LoginEvent');
+
+Route::group(['middleware' => ['entrancesession']], function() {
+//ENTRANCE ADMIN
+    Route::get('/DashAdminEntrance', [EntranceController::class, 'DashAdminEntrance'])->name('DashboardAdminEntrance'); 
+    Route::get('/DataAbsen', [EntranceController::class, 'DataAbsen'])->name('DataAbsen'); 
+    Route::get('/ScanQr', [EntranceController::class, 'ScanQr'])->name('ScamQr'); 
+    Route::get('/DataPeserta', [EntranceController::class, 'DataPeserta'])->name('DataPeserta'); 
+
+    //KEMENAG
+    Route::get('/DashboardPengunjung', [KemenagKontroller::class, 'DashboardPengunjung'])->name('DashboardPengunjung');
+
+});
+
+//KEMENAG
+Route::get('/RegisterEntKemenag', [KemenagKontroller::class, 'Register'])->name('RegisterEntKemenag');
+Route::get('/LoginKemenag', [KemenagKontroller::class, 'Login'])->name('LoginKemenag');
+Route::post('/PostLoginKemenag', [KemenagKontroller::class, 'PostLoginKemenag'])->name('PostLoginKemenag');
+
+
+Route::group(['middleware' => ['kemenagsession']], function() {
+
+    //KEMENAG
+    Route::get('/DashboardPengunjung', [KemenagKontroller::class, 'DashboardPengunjung'])->name('DashboardPengunjung');
+    Route::get('/ReRegis', [KemenagKontroller::class, 'ReRegis'])->name('ReRegis');
+    Route::get('/ReRegisCustWithScanner', [KemenagKontroller::class, 'ReRegisCustWithScanner'])->name('ReRegisCustWithScanner');
+    Route::get('/ReRegisScanner', [KemenagKontroller::class, 'ReRegisScanner'])->name('ReRegisScanner');
+    Route::get('/ValidasiPembayaran', [KemenagKontroller::class, 'ValidasiPembayaran'])->name('ValidasiPembayaran');
+    Route::get('/FormScan', [KemenagKontroller::class, 'FormScan'])->name('FormScan');
+    Route::get('/ReportVisitor', [KemenagKontroller::class, 'ReportVisitor'])->name('ReportVisitor');
+    Route::get('/DataPeserta', [KemenagKontroller::class, 'DataPeserta'])->name('DataPeserta');
+    Route::get('/Profile', [KemenagKontroller::class, 'Profile'])->name('Profile');
+    Route::get('/ConnectingQrToCard', [KemenagKontroller::class, 'ConnectingQrToCard'])->name('ConnectingQrToCard');
+    Route::post('/ResetPassword', [KemenagKontroller::class, 'ResetPassword'])->name('ResetPassword');
+    Route::get('/ReportTapping', [KemenagKontroller::class, 'ReportTapping'])->name('ReportTapping');
+    Route::get('/DeleteVisitor/{code_qr}', [KemenagKontroller::class, 'DeleteVisitor'])->name('DeleteVisitor');
+    
+});
+
+Route::get('/ViewScreen', [KemenagKontroller::class, 'ViewScreen'])->name('ViewScreen');
+Route::get('/VerifyOtp', [KemenagKontroller::class, 'VerifyOtp'])->name('VerifyOtp');
+
+
+Route::get('/ScreenView/{code_gate}', [KemenagKontroller::class, 'RealTimeData'])->name('RealTimeData');
+Route::get('/visitorWithoutLogin', [EntranceController::class, 'visitorWithoutLogin'])->name('visitorWithoutLogin');
+

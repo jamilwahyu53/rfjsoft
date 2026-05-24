@@ -15,12 +15,12 @@ class Masterclient extends Migration
     {
         Schema::create('masterclient', function (Blueprint $table) {
             $table->string('Kode');
-            $table->string('ClientName');
-            $table->string('Address');
-            $table->string('Phone');
-            $table->string('NPWP');
-            $table->string('Email');
-            $table->string('Logo');
+            $table->string('ClientName')->nullable();
+            $table->string('Address')->nullable();
+            $table->string('Phone')->nullable();
+            $table->string('NPWP')->nullable();
+            $table->string('Email')->nullable();
+            $table->string('Logo')->nullable();
             $table->boolean('IsActive')->default(true);
             $table->string('CreateBy')->default('ADMIN');
             $table->timestamp('CreateDate')->useCurrent();

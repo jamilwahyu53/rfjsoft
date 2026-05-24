@@ -66,6 +66,8 @@ class Kernel extends HttpKernel
 
 
         'usersession' => \App\Http\Middleware\SessionCheck::class,
+        'entrancesession' => \App\Http\Middleware\SessionEntrance::class,
+        'kemenagsession' => \App\Http\Middleware\SessionKemenag::class,
         'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',

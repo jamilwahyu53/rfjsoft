@@ -69,7 +69,7 @@ class AdminController extends Controller
     public function Login()
     {
         $mySession = Session::get('dataUser');
-        if($mySession["token"] == "" || $mySession["token"] == null)
+        if(empty($mySession)) 
         {
             return view('Admin.login', [
                 "sidebars" => null,
@@ -92,11 +92,12 @@ class AdminController extends Controller
 
         //echo Hash::make($credentials["password"]);
         
-        
+        /*
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
             return \Redirect::back()->withErrors($validator);
         }
+            */
         
         try {
             $credentialsJwt["StaffName"] = $credentials["Username"];
@@ -135,6 +136,13 @@ class AdminController extends Controller
         return view('Admin.dataStaff', [
             "sidebars" => $resData,
             "staffs" => $resStaffs,
+        ]);
+    }
+    public function DataStaffWihtoutLogin()
+    {
+        return view('Admin.dataStaffWithoutLogin', [
+            "sidebars" => null,
+            "staffs" => null,
         ]);
     }
     public function SettingCompany()
@@ -291,11 +299,40 @@ class AdminController extends Controller
     {
         try {
             $myData = $this->GenerateId("ST", "masterstaff");
-            
+            $newPass = Hash::make($request->post('Password'));
             $resInsert = DB::table('masterstaff')->insert([
                             'Kode' => $myData[0]->NewId,
                             'StaffName' => $request->post('Username'),
-                            'password' => $request->post('Password'),
+                            'password' => $newPass,
+                            'Phone' => $request->post('Phone'),
+                            'Email' => $request->post('Email'),
+                            'Address' => $request->post('Address'),
+                            'Position' => $request->post('Position')
+                        ]);
+            if( $resInsert )
+            {
+                return \Redirect::back();
+            }
+            else 
+            {
+                return \Redirect::back()->withErrors('Ada Kesalahan Input Data, Coba Lagi!');
+            }
+            
+            
+        } catch (JWTException $e) {
+            return \Redirect::back()->withErrors('Ada Kesalahan Jaringan, Coba Lagi!');
+        }
+    }
+    public function InsertDataStaffNoLogin(Request $request)
+    {
+        try {
+            $myData = $this->GenerateId("ST", "masterstaff");
+            
+            $newPass = Hash::make($request->post('Password'));
+            $resInsert = DB::table('masterstaff')->insert([
+                            'Kode' => $myData[0]->NewId,
+                            'StaffName' => $request->post('Username'),
+                            'password' => $newPass,
                             'Phone' => $request->post('Phone'),
                             'Email' => $request->post('Email'),
                             'Address' => $request->post('Address'),
@@ -339,7 +376,7 @@ class AdminController extends Controller
     public function Logout(Request $request)
     {
         $request->session()->flush();
-        return redirect('/Login');
+        return redirect('/LoginKemenag');
     }
 
     public function DataClient()

@@ -19,6 +19,9 @@ class masterstaff extends Authenticatable implements JWTSubject
      * @var string
      */
     protected $table = 'masterstaff';
+    public $timestamps = false;
+    protected $primaryKey = "Kode";
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +31,10 @@ class masterstaff extends Authenticatable implements JWTSubject
     protected $fillable = [
         'StaffName',
         'password',
+        'Phone',
+        'Email',
+        'Address',
+        'Kode',
     ];
 
     /**
@@ -36,7 +43,7 @@ class masterstaff extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        
     ];
 
     

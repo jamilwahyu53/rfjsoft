@@ -1,0 +1,45 @@
+
+1. registrasi by admin tanpa check apakah sudah bayar atau belum
+2. registrasi on-site cek berbayar atau tidak   DONE
+3. FROM SCAN cek berbayar DONE 
+
+1. list nomer hotel BELUM ADA
+2. kunci 2 
+3. yang baru regis kamar nya gimana ? ini di manual 
+
+
+NOTE
+1. place holder di hilangkan semua          DONE
+2. NPWP IKUT BANK                           DONE
+3. pilih post di ganti dengan pilih sesi    DONE
+4. stage yg sudah digunakan tetap muncul datanya, 
+	dengan penambahan timestampnya, jangan 
+	lupa untuk warna di ganti dengan merah  DONE
+5. registrasi customer with panitia masih ada bebayar 
+
+
+
+
+1. Unit kerja/instansi "Panitia" Biro Haji dan Umroh dihapus ditambahkan Biro Umum, Biro Humas dan Komunikasi Publik, BMBPSDM, Biro Keuangan dan BMN
+2. Tambahkan fitur find di satuan kerja dan tambah jabatan di eselon 1 dan 2 (agar memudahkan)
+3. Agar ada reset password
+4. Profile (utk update/merubah data)
+
+5.
+   Urutan pada Unit Kerja:
+   1.  Menteri/Staf Ahli/Staf Khusus/Tenaga Ahli
+   2. Eselon I
+   3. Eselon II
+   4. UPT 
+   5. Kanwil Provinsi
+   6. PTKN
+   7. Panitia
+   8. Lainnya
+
+6. Unit Kerja " Kanwil Provinsi" => pada satuan kerjanya lansung nama daerah  (ACEH, BALI dll)
+7. Pada satuan kerja langsung nomenklatur satker (Biro, Direktorat, Sekretariat dll)
+8. Pada Unit Kerja UPT => satuan kerja nya: Sekretariat Baznas, LPQ, LPMQ dll)
+9. Pada Unit Kerja lainnya, Pangkat/Golongan : dihilangkan
+
+
+vurw tczl mfef kofv

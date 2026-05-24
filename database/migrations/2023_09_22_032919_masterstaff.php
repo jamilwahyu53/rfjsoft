@@ -17,11 +17,11 @@ class Masterstaff extends Migration
             $table->string('Kode');
             $table->string('StaffName');
             $table->string('Password');
-            $table->string('Phone');
-            $table->string('Email');
-            $table->string('Address');
-            $table->string('Photo');
-            $table->string('Position');
+            $table->string('Phone')->nullable();
+            $table->string('Email')->nullable();
+            $table->string('Address')->nullable();
+            $table->string('Photo')->nullable();
+            $table->string('Position')->nullable();
             $table->boolean('IsActive')->default(true);
             $table->string('CreateBy')->default('ADMIN');
             $table->timestamp('CreateDate')->useCurrent();

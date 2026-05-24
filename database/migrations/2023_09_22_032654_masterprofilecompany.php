@@ -13,7 +13,7 @@ class Masterprofilecompany extends Migration
      */
     public function up()
     {
-        Schema::create('masterclient', function (Blueprint $table) {
+        Schema::create('MasterProfileCompany', function (Blueprint $table) {
             $table->string('Kode');
             $table->string('CompanyName');
             $table->string('Owner');

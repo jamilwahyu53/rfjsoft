@@ -40,6 +40,100 @@
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
       }
+
+      #loader {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity .6s ease;
+    }
+
+    #loader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader-logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+      animation: logoPop .7s ease;
+    }
+
+    @keyframes logoPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+
+
+    
+
+    .container-fluid, .fullscreen-bg, .card.fullscreen-card {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.fullscreen-bg {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: url('/images/background.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
+}
+
+.fullscreen-card {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    text-align: center !important;
+}
+
+.fullscreen-card img {
+    width: 80vw !important;
+    height: auto !important;
+    max-height: 70vh !important;
+    object-fit: contain !important;
+    margin-bottom: 2rem !important;
+    border-radius: 50% !important;
+}
+
+.fullscreen-card h3 {
+    font-size: 10vw !important;
+    font-weight: bold !important;
+    margin-bottom: 1rem !important;
+}
+
+.fullscreen-card p {
+    font-size: 6vw !important;
+    margin-bottom: 0.8rem !important;
+    color: #222 !important;
+}
+
+.fullscreen-card .text-muted {
+    font-size: 5vw !important;
+}
+
+
+
     </style>
     @endif
 </head>
