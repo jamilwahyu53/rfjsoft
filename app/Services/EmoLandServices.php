@@ -35,7 +35,8 @@ class EmoLandServices
             throw new Exception('URL is required');
         }
 
-        $existed = videosModel::where("url", $data["url"])->first();
+        $existed = videosModel::where("video_id", $data["video_id"])->first();
+       
         $arrExisted = $existed ? $existed->toArray() : [];
         
         $arrayMerge = array_merge($arrExisted, $data);
@@ -80,6 +81,12 @@ class EmoLandServices
     public function getAllVideo(){
         $retVideos = videosModel::all();
          return $retVideos ? 
+            ServiceResponse::success($retVideos->toArray(), "Success") : 
+            ServiceResponse::error("Gagal Ambil Data Video");
+    }
+    public function getVideobyId($data){
+        $retVideos = videosModel::where('video_id', $data['video_id'])->first();
+        return $retVideos ? 
             ServiceResponse::success($retVideos->toArray(), "Success") : 
             ServiceResponse::error("Gagal Ambil Data Video");
     }

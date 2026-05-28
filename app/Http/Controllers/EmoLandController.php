@@ -87,4 +87,16 @@ class EmoLandController extends Controller
             return ApiResponse::error($e->getMessage());
         } 
     }
+    public function GetVideoById(Request $request){
+        $data = $request->all();
+        try {
+            $retVideos = $this->emo_land_services->getVideobyId($data);
+
+            return !$retVideos["status"] ? 
+                ApiResponse::error($retVideos["message"]) :
+                ApiResponse::success($retVideos["data"], "Success");
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage());
+        } 
+    }
 }

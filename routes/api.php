@@ -57,3 +57,4 @@ Route::post('/register_emo_land', [EmoLandController::class, 'Register'])->name(
 Route::post('/upsert_video', [EmoLandController::class, 'UpsertVideo'])->name('upsert_video');
 Route::post('/delete_video', [EmoLandController::class, 'DeteleVideo'])->name('delete_video');
 Route::get('/get_video', [EmoLandController::class, 'GetAllVideo'])->name('get_all_video');
+Route::post('/get_video_by_id', [EmoLandController::class, 'GetVideoById'])->name('get_video_by_id');
