@@ -99,4 +99,20 @@ class EmoLandController extends Controller
             return ApiResponse::error($e->getMessage());
         } 
     }
+
+    public function LoginScreen()
+    {
+        $mySession = Session::get('dataUser');
+        if(empty($mySession)) 
+        {
+            return view('EmoLand.login', [
+                "sidebars" => null,
+            ]);
+        }
+        else
+        {
+            return redirect('/DashAdmin');
+        }
+        
+    }
 }

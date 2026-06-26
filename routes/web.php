@@ -6,6 +6,7 @@ use App\Http\Controllers\rjsoft;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EntranceController;
 use App\Http\Controllers\KemenagKontroller;
+use App\Http\Controllers\EmoLandController;
 
 use App\Models\group;
 
@@ -126,3 +127,7 @@ Route::get('/VerifyOtp', [KemenagKontroller::class, 'VerifyOtp'])->name('VerifyO
 Route::get('/ScreenView/{code_gate}', [KemenagKontroller::class, 'RealTimeData'])->name('RealTimeData');
 Route::get('/visitorWithoutLogin', [EntranceController::class, 'visitorWithoutLogin'])->name('visitorWithoutLogin');
 
+
+
+//emo_land 
+Route::get('/Login-EmoLand', [EmoLandController::class, 'LoginScreen'])->name('LoginScreen');

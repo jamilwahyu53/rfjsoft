@@ -18,6 +18,7 @@ class VideosModel extends Migration
             $table->string("url")->nullable();
             $table->string("grade")->nullable();
             $table->string("title")->nullable();
+            $table->integer("stage")->nullable();
             $table->string("result")->nullable();
             $table->string("created_by")->nullable();
             $table->string("updated_by")->nullable();

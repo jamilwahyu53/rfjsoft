@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class videosModel extends Model
+class MasterEkspresiModel extends Model
 {
     use HasFactory;
-    protected $table = 'videos';
+    protected $table = 'master_expression';
     public $incrementing = false;
     protected $keyType = 'string'; 
-    protected $primaryKey = "video_id";
+    protected $primaryKey = "id";
     protected $fillable = [
-        "video_id",
-        "url",
-        "grade",
-        "title",
-        "stage",
-        "result",
+        "id",
+        "expression",
+        "stars",
+        "min_value",
+        "max_value",
+        "solution",
+        "active",
         "created_at",
         "created_by",
         "updated_by",
@@ -26,12 +27,13 @@ class videosModel extends Model
     ];
 
     protected $casts = [
-        'video_id' => 'string',
-        'url' => 'string',
-        'grade' => 'string',
-        'title' => 'string',
-        'stage' => 'integer',
-        'result' => 'string',
+        'id' => 'string',
+        'expression' => 'string',
+        'stars' => 'integer',
+        'min_value' => 'integer',
+        'max_value' => 'integer',
+        'solution' => 'string',
+        'active' => 'boolean',
         'created_by' => 'string',
         'updated_by' => 'string',
         'created_date' => 'datetime',

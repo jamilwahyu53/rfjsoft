@@ -85,7 +85,10 @@ class EmoLandServices
             ServiceResponse::error("Gagal Ambil Data Video");
     }
     public function getVideobyId($data){
-        $retVideos = videosModel::where('video_id', $data['video_id'])->first();
+        $retVideos = videosModel::
+                        where('grade', $data['grade'])
+                        ->where('stage', $data['stage'])
+                        ->first();
         return $retVideos ? 
             ServiceResponse::success($retVideos->toArray(), "Success") : 
             ServiceResponse::error("Gagal Ambil Data Video");
