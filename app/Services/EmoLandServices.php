@@ -89,8 +89,10 @@ class EmoLandServices
                         where('grade', $data['grade'])
                         ->where('stage', $data['stage'])
                         ->first();
+                        
         return $retVideos ? 
             ServiceResponse::success($retVideos->toArray(), "Success") : 
             ServiceResponse::error("Gagal Ambil Data Video");
+            
     }
 }
