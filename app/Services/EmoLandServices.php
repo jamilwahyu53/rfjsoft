@@ -89,9 +89,12 @@ class EmoLandServices
                         where('grade', $data['grade'])
                         ->where('stage', $data['stage'])
                         ->first();
+        $maxVideo = VideosModel::where('grade', $data['grade'])->max('stage');
+        $retAll = $retVideos->toArray();
+        $retAll["max_video"] = $maxVideo;
                         
         return $retVideos ? 
-            ServiceResponse::success($retVideos->toArray(), "Success") : 
+            ServiceResponse::success($retAll, "Success") : 
             ServiceResponse::error("Gagal Ambil Data Video");
             
     }
