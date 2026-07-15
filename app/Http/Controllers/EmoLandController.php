@@ -115,4 +115,9 @@ class EmoLandController extends Controller
         }
         
     }
+
+    public function SaveResult(Request $request){
+        $resAll = $request->all();
+        ApiResponse::success($resAll, "Success");
+    }
 }
