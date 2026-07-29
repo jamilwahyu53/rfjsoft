@@ -59,3 +59,5 @@ Route::post('/delete_video', [EmoLandController::class, 'DeteleVideo'])->name('d
 Route::get('/get_video', [EmoLandController::class, 'GetAllVideo'])->name('get_all_video');
 Route::post('/get_video_by_id', [EmoLandController::class, 'GetVideoById'])->name('get_video_by_id');
 Route::post('/save-result-emo', [EmoLandController::class, 'SaveResult'])->name('SaveResult');
+Route::post('/save-luxand', [EmoLandController::class, 'SaveLuxand'])->name('SaveLuxand');
+Route::post('/get-luxand-average', [EmoLandController::class, 'GetLuxandAverage'])->name('GetLuxandAverage');

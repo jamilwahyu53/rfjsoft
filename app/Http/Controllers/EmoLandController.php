@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\ApiResponse;
 use App\Services\EmoLandServices;
+use App\Models\MasterEkspresiModel;
+use App\Models\LuxandResultModel;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class EmoLandController extends Controller
 {
@@ -117,7 +121,103 @@ class EmoLandController extends Controller
     }
 
     public function SaveResult(Request $request){
-        $resAll = $request->all();
-        ApiResponse::success($resAll, "Success");
+        $validator = Validator::make($request->all(), [
+            'expression' => 'required|string',
+            'value' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::validationError($validator->errors());
+        }
+
+        try {
+            $expression = strtolower(trim($request->input('expression')));
+            $value = $request->input('value');
+
+            $result = MasterEkspresiModel::whereRaw('LOWER(expression) = ?', [$expression])
+                ->where('min_value', '<=', $value)
+                ->where('max_value', '>=', $value)
+                ->where('active', true)
+                ->first();
+
+            if (! $result) {
+                return ApiResponse::error("Data ekspresi tidak ditemukan", null, 404);
+            }
+
+            return ApiResponse::success($result->toArray(), "Success");
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage());
+        }
+    }
+
+    public function SaveLuxand(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|string',
+            'stage' => 'required|integer',
+            'mode' => 'required|string',
+            'value' => 'required|numeric',
+            'created_at' => 'nullable|date',
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::validationError($validator->errors());
+        }
+
+        try {
+            $data = $request->only([
+                'user_id',
+                'stage',
+                'mode',
+                'value',
+                'created_at',
+            ]);
+
+            $data['uuid'] = (string) Str::uuid();
+            $data['created_at'] = empty($data['created_at']) ? now() : $data['created_at'];
+
+            $result = LuxandResultModel::create($data);
+
+            return ApiResponse::success($result->toArray(), "Success");
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage());
+        }
+    }
+
+    public function GetLuxandAverage(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|string',
+            'mode' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::validationError($validator->errors());
+        }
+
+        try {
+            $userId = $request->input('user_id');
+            $mode = $request->input('mode');
+
+            $latestResults = LuxandResultModel::where('user_id', $userId)
+                ->where('mode', $mode)
+                ->orderBy('created_at', 'desc')
+                ->get()
+                ->unique('stage')
+                ->sortBy('stage')
+                ->values();
+
+            if ($latestResults->isEmpty()) {
+                return ApiResponse::error("Data luxand tidak ditemukan", null, 404);
+            }
+
+            return ApiResponse::success([
+                'user_id' => $userId,
+                'mode' => $mode,
+                'average_value' => $latestResults->avg('value'),
+                'total_stage' => $latestResults->count(),
+                'stages' => $latestResults->toArray(),
+            ], "Success");
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage());
+        }
     }
 }
